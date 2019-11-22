@@ -1,0 +1,22 @@
+{
+  "name": "techdegree-project-8",
+  "version": "1.0.0",
+  "description": "Techdegree-Project-8",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Techdegree-Project-8"
+  },
+  "author": "Jake Morris",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^2.0.4",
+    "sequelize": "^5.21.2",
+    "sequelize-cli": "^5.5.1",
+    "sqlite3": "^4.1.0"
+  }
+}
