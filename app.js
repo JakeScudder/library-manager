@@ -1,23 +1,14 @@
-const db = require('./db');
-const { Library } = db.models;
+const express = require('express');
+const path = require('path');
+const app = express()
 
-(async () => {
-  await db.sequelize.sync({force: true});
-  try {
-    const book = await Library.create({
-      title: "The Green Mile",
-      author: "Steven King"
-    })
-    console.log(book.toJSON());
+const routes = require('./routes/index');
+const books = require('./routes/books');
 
-    const book2 = await Library.create({
-      title: "Thinner",
-      author: "Steven King"
-    })
-    console.log(book2.toJSON());
+//Set view Engine
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
 
-  } catch (error) {
-    console.error('Error connection to the database: ', error );
-  }
-})();
+app.use('/', routes);
+app.use('/books', books);
 

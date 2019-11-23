@@ -11,6 +11,6 @@ const db = {
   models: {},
 }
 
-db.models.Library = require('./models/book.js') (sequelize);
+db.models.Book = require('./book.js') (sequelize);
 
 module.exports = db;
