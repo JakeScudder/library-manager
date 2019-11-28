@@ -4,7 +4,7 @@
   "description": "Techdegree-Project-8",
   "main": "app.js",
   "scripts": {
-    "start" : "nodemon app.js"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -13,6 +13,8 @@
   "author": "Jake Morris",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
     "nodemon": "^2.0.1",
     "pug": "^2.0.4",

@@ -1,6 +1,19 @@
 extends layout
 
 block content
-  header 
-    h1= "Books"
-  p Welcome to #{title}
+  header
+  h1= "Books"
+  div.container 
+    p #[a(class="button" href="/books/new") Create New Book]
+    table 
+      tr
+        th Title
+        th Author
+        th Genre
+        th Year
+      each n in books
+        tr
+          td: a(href="book_detail.html") #{n.title}
+          td= n.author
+          td= n.genre
+          td= n.year

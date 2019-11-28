@@ -2,6 +2,14 @@
 const express = require('express');
 const path = require('path');
 const app = express()
+const cookieParser = require('cookie-parser');
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+const bodyParser = require('body-parser'); 
+app.use(bodyParser.json()); 
+app.use(cookieParser());
 
 // Importing json file and defining projects variable
 const routes = require('./routes/index');
@@ -15,16 +23,9 @@ app.use('/static', express.static(path.join(__dirname, '/public')))
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(express.json());
-
 app.use('/', routes);
 app.use('/books', books);
 
-// Can't figure out how to get this working in the routes folder
-// // Setting the index route
-// app.get('/', (req, res, next) => {
-//   res.render('index');
-// });
 
 
 app.listen(3000, () => {
