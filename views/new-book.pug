@@ -3,7 +3,7 @@ extends layout
 block content
   head  
     h3= title
-    form(action="/", method="post")
+    form(action="/books/new", method="post")
       p 
         label(for="title") Title
         input(type="text" id="title", name="title" value=book.title)

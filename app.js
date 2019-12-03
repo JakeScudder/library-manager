@@ -5,10 +5,11 @@ const app = express()
 const cookieParser = require('cookie-parser');
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true}));
 
 const bodyParser = require('body-parser'); 
 app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser());
 
 // Importing json file and defining projects variable

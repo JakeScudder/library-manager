@@ -18,8 +18,7 @@ function asyncHandler(cb) {
 
 /*  GET All book listings and display to homepage */
 router.get('/', asyncHandler(async (req, res) => {
-  const books = await Book.findAll({ order: [[ "year", "DESC"]]})
-  console.log(books);
+  const books = await Book.findAll({ order: [[ "author", "ASC"]]})
   res.render("index", { books, header: "The Library"});
 }))
 
@@ -28,20 +27,52 @@ router.get('/new', asyncHandler(async (req, res) => {
   res.render("new-book", {book: {}, header: "The Library", title: "New Book"});
 }));
 
-//Broken post request to add a book to the database
+// Post New Book Route
 router.post('/new', asyncHandler(async (req, res) => {
   let book;
   try {
-    console.log(req);
     book = await Book.create(req.body);
-    res.redirect("index", {book, header: "The Library"});
+    res.redirect("/");
   } catch (error) {
       console.error(error);
   }
-    
 }));
 
+//GET update book form
+router.get('/:id', asyncHandler(async (req, res) => {
+  let book;
+  try {
+    book = await Book.findByPk(req.params.id)
+    res.render('update-book', {book, header: "Update Book", title: book.title})
+  } catch (error) {
+    console.error(error);
+}
+}))
 
+// Update a book
+router.post('/:id', asyncHandler(async (req, res) => {
+  let book;
+  try {
+    book = await Book.findByPk(req.params.id)
+    await book.update(req.body);
+    res.redirect("/");
+  } catch (error) {
+      console.error(error);
+  } 
+}));
+
+// Delete a book
+router.post("/:id/delete", asyncHandler(async (req, res)=> {
+  let book;
+  try {
+    console.log(req.body)
+    book = await Book.findByPk(req.params.id);
+    await book.destroy();
+    res.redirect("/");
+  } catch (error) {
+      console.error(error)
+  }
+}))
 
 
 
