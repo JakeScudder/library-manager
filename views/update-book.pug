@@ -1,6 +1,9 @@
 extends layout
 
 block content
+  if error
+    h2 Error
+    p= error.message
   form(action="/books/" + book.id, method="post")
     p 
     label(for="title") Title

@@ -29,8 +29,31 @@ module.exports = (sequelize) => {
         }
       }
     },
-    genre: Sequelize.STRING,
-    year: Sequelize.INTEGER
+    genre: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Please provide a value for "genre"',
+        },
+        notEmpty: {
+          msg: 'Please provide a value for the "genre"',
+        }
+      }
+    },
+    year: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Please provide a value for "year"',
+        },
+        notEmpty: {
+          msg: 'Please provide a value for the "year"',
+        }
+      }
+
+    }
   }, { sequelize });
 
   return Book;
