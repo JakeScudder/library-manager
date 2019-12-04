@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  form(action="/books/:id", method="post")
+  form(action="/books/" + book.id, method="post")
     p 
     label(for="title") Title
     input(type="text" id="title", name="title" value=book.title)
@@ -16,7 +16,7 @@ block content
       input(type="text" id="Year", name="year" value=book.year)
     p
       input(type="submit" value="Update Book")
-  form(action="/books/:id/delete", method="post", onsubmit="return confirm('Do you really want to delete the book?');")
+  form(action=`/books/${book.id}/delete`, method="post", onsubmit="return confirm('Do you really want to delete the book?');")
     p 
       a(class="button" href="/books") Cancel
     p

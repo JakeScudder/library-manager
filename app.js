@@ -27,6 +27,22 @@ app.set('view engine', 'pug');
 app.use('/', routes);
 app.use('/books', books);
 
+/* Error Handlers */
+
+//404 page not found
+app.use((req,res,next) => {
+  const err = new Error("Sorry, we couldn't find the page you were looking for.");
+  err.status = 404;
+  next(err)
+})
+
+//Render Error Page
+app.use((err, req, res, next) => {
+  res.locals.error = err;
+  res.status(err.status);
+  res.render('error');
+})
+
 
 
 app.listen(3000, () => {
