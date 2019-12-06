@@ -2,7 +2,7 @@ extends layout
 
 block content
   header
-  h1= "Books"
+  h2= "Books"
   div.container 
     p #[a(class="button" href="/books/new") Create New Book]
     table 
@@ -17,3 +17,9 @@ block content
           td= n.author
           td= n.genre
           td= n.year
+  div.page
+    - var n = 2
+    ul
+      li: a(class="links" href="/") 1
+      while n <= pages
+        li #[a(class="links" href="/books/page/" + n alt= n) #{n++}]

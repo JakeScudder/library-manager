@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
+//testing
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 //Retrieves Sequelize object and accesses Book model
 const Book = require('../models').models.Book;
 
@@ -15,13 +19,40 @@ function asyncHandler(cb) {
   }
 }
 
+//Page Number Function
+let pages;
+const pageLinks = (async (req, res) => {
+  const allBooks = await Book.findAll();
+  pages = Math.ceil(allBooks.length / 5);
+  return pages;
+})
+
+pageLinks();
+
 
 /*  GET All book listings and display to homepage */
 router.get('/', asyncHandler(async (req, res) => {
   const books = await Book.findAll({ 
+    offset: 0,
+    limit: 5,
     order: [[ "author", "ASC"], ["year", "DESC"]]
   })
-  res.render("index", { books, header: "The Library"});
+  res.render("index", { books, pages, style: '../static/stylesheets/style.css', header: "The Library"});
+}))
+
+//In Progress
+/* Get a particular page link*/
+router.get('/page/:n', asyncHandler(async (req, res) => {
+  let page = req.params.n;
+  let offset = (page * 5) - 5;
+  let limit = 5;
+
+  const books = await Book.findAll({ 
+    offset: offset,
+    limit: limit,
+    order: [[ "author", "ASC"], ["year", "DESC"]],
+  })
+  res.render("index", { books, pages, style: '../../static/stylesheets/style.css', header: "The Library"});
 }))
 
 /* New Book Route*/
@@ -64,7 +95,8 @@ router.post('/:id', asyncHandler(async (req, res) => {
   try {
     book = await Book.findByPk(req.params.id);
     if (book) {
-      await Book.update(req.body);
+      //Waiting to update individual book from the Book table
+      await book.update(req.body);
       res.redirect("/");
     } else {
       res.sendStatus(404);
