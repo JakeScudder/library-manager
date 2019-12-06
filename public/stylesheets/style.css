@@ -3,11 +3,16 @@ body {
   font: 18px "Garamond", serif;
 }
 
+table {
+  margin-bottom: 40px;
+}
+
 a {
   color: #019875;
   text-decoration: none;
   font-weight: bold;
   transition: 0.4s;
+  font-size: 20px;
 }
 
   a:hover {
@@ -19,7 +24,7 @@ a.button, input[type=submit] {
   background: #019875;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 10px 14px 12px;
-  font-size: 14px;
+  font-size: 18px;
   border-radius: 2px;
   cursor: pointer;
 }
@@ -51,13 +56,12 @@ ul {
 /* Page Links*/
 div.page ul li {
   display: inline;
-  font-size: 24px;
+  font-size: 20px;
   margin-right: 10px;
   color: white;
   background: #019875;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 10px 14px 12px;
-  font-size: 14px;
   border-radius: 2px;
   cursor: pointer;
 }
@@ -87,6 +91,7 @@ tr:nth-child(2n) {
 
 td {
   padding: 5px 20px 5px 10px;
+  font-size: 18px;
 }
 
 label {

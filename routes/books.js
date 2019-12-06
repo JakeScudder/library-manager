@@ -57,7 +57,7 @@ router.get('/page/:n', asyncHandler(async (req, res) => {
 
 /* New Book Route*/
 router.get('/new', asyncHandler(async (req, res) => {
-  res.render("new-book", {book: {}, header: "New Book"});
+  res.render("new-book", {book: {}, style: '../static/stylesheets/style.css', header: "New Book"});
 }));
 
 // Post New Book Route and checks if fields are valid
@@ -69,7 +69,7 @@ router.post('/new', asyncHandler(async (req, res, next) => {
   } catch (error) {
     if (error.name === "SequelizeValidationError") {
       book = await Book.build(req.body);
-      res.render("new-book", {book: {}, error, header: "New Book"})
+      res.render("new-book", {book: {}, style: '../static/stylesheets/style.css', error, header: "New Book"})
     } else {
       throw error;
     }
@@ -80,7 +80,7 @@ router.post('/new', asyncHandler(async (req, res, next) => {
 router.get('/:id', asyncHandler(async (req, res, next) => {
   const book = await Book.findByPk(req.params.id);
   if (book) {
-    res.render('update-book', {book, header: "Update Book"})
+    res.render('update-book', {book, style: '../static/stylesheets/style.css', header: "Update Book"})
   } else {
     const err = new Error("Sorry, we couldn't find that particular book.");
     err.status = 404;
@@ -104,7 +104,7 @@ router.post('/:id', asyncHandler(async (req, res) => {
   } catch (error) {
     if(error.name === "SequelizeValidationError") {
       book = await Book.build(req.body);
-      res.render('update-book', { book, error, header: "Update Book"})
+      res.render('update-book', { book, style: '../static/stylesheets/style.css', error, header: "Update Book"})
     } else {
       throw error;
     }
