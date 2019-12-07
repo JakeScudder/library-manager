@@ -40,7 +40,40 @@ router.get('/', asyncHandler(async (req, res) => {
   res.render("index", { books, pages, style: '../static/stylesheets/style.css', header: "The Library"});
 }))
 
-//In Progress
+
+// Search Route and variables
+let query;
+const queryFunction = () => {
+  let searchBar = document.querySelectorAll("form.search");
+  console.log(searchBar);
+  query = searchBar.values;
+  return query
+};
+setTimeout(queryFunction, 3000);
+
+router.post('/search/:query', asyncHandler(async (req, res) => {
+  let searchFunction = {};
+    if (req.params.query) {
+      searchFunction.title = {$like: '%' + req.params.query + '%'};
+    };
+    if (req.params.query) {
+      searchFunction.author = {$like: '%' + req.params.query + '%'};
+    };
+    if (req.params.query) {
+      searchFunction.genre = {$like: '%' + req.params.query + '%'};
+    };
+    if (req.params.query) {
+      searchFunction.year = {$like: '%' + req.params.query + '%'};
+    };
+  const books = await Book.findAll({ 
+    where: searchFunction,
+    order: [[ "author", "ASC"], ["year", "DESC"]],
+  })
+  res.render("index", { books, pages, style: '../../static/stylesheets/style.css', header: "The Library"});
+}))
+
+
+
 /* Get a particular page link*/
 router.get('/page/:n', asyncHandler(async (req, res) => {
   let page = req.params.n;
