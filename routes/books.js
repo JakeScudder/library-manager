@@ -52,21 +52,21 @@ const queryFunction = () => {
 setTimeout(queryFunction, 3000);
 
 router.post('/search/:query', asyncHandler(async (req, res) => {
-  let searchFunction = {};
+  let searchArray = {};
     if (req.params.query) {
-      searchFunction.title = {$like: '%' + req.params.query + '%'};
+      searchArray.title = {$like: '%' + req.params.query + '%'};
     };
     if (req.params.query) {
-      searchFunction.author = {$like: '%' + req.params.query + '%'};
+      searchArray.author = {$like: '%' + req.params.query + '%'};
     };
     if (req.params.query) {
-      searchFunction.genre = {$like: '%' + req.params.query + '%'};
+      searchArray.genre = {$like: '%' + req.params.query + '%'};
     };
     if (req.params.query) {
-      searchFunction.year = {$like: '%' + req.params.query + '%'};
+      searchArray.year = {$like: '%' + req.params.query + '%'};
     };
   const books = await Book.findAll({ 
-    where: searchFunction,
+    where: searchArray,
     order: [[ "author", "ASC"], ["year", "DESC"]],
   })
   res.render("index", { books, pages, style: '../../static/stylesheets/style.css', header: "The Library"});
