@@ -42,33 +42,27 @@ router.get('/', asyncHandler(async (req, res) => {
 
 
 // Search Route and variables
-let query;
-const queryFunction = () => {
-  let searchBar = document.querySelectorAll("form.search");
-  console.log(searchBar);
-  query = searchBar.values;
-  return query
-};
-setTimeout(queryFunction, 3000);
 
-router.post('/search/:query', asyncHandler(async (req, res) => {
+router.post('/search', asyncHandler(async (req, res) => {
   let searchArray = {};
-    if (req.params.query) {
-      searchArray.title = {$like: '%' + req.params.query + '%'};
+    if (req.body.query) {
+      searchArray.title = {[Op.like]: '%' + req.body.query};
     };
-    if (req.params.query) {
-      searchArray.author = {$like: '%' + req.params.query + '%'};
+    if (req.body.query) {
+      searchArray.author = {[Op.like]: '%' + req.body.query};
     };
-    if (req.params.query) {
-      searchArray.genre = {$like: '%' + req.params.query + '%'};
+    if (req.body.query) {
+      searchArray.genre = {[Op.like]: '%' + req.body.query};
     };
-    if (req.params.query) {
-      searchArray.year = {$like: '%' + req.params.query + '%'};
+    if (req.body.query) {
+      searchArray.year = {[Op.like]: '%' + req.body.query};
     };
+    console.log(searchArray);
   const books = await Book.findAll({ 
     where: searchArray,
     order: [[ "author", "ASC"], ["year", "DESC"]],
   })
+  console.log(books);
   res.render("index", { books, pages, style: '../../static/stylesheets/style.css', header: "The Library"});
 }))
 
