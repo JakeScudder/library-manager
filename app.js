@@ -40,7 +40,7 @@ app.use((req,res,next) => {
 app.use((err, req, res, next) => {
   res.locals.error = err;
   res.status(err.status);
-  res.render('error');
+  res.render('page-not-found', {header: "Page Not Found", style: '../static/stylesheets/style.css'});
 })
 
 

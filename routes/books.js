@@ -66,27 +66,14 @@ router.post('/search', asyncHandler(async (req, res) => {
     where: {[Op.or]: [{title},{year}, {genre}, {author}]},
     order: [[ "author", "ASC"], ["year", "DESC"]],
   })
-  console.log(query);
-  // Debugging
-  // const book2 = await Book.findAll({
-  //   where: {
-  //     [Op.or]: [{title: {
-  //       [Op.like]:'%warbreaker'
-  //     }}]
-  //   }
-  // });
-
   res.render("index", { books, pages, style: '../../static/stylesheets/style.css', header: "The Library"});
 }))
-
-
 
 /* Get a particular page link*/
 router.get('/page/:n', asyncHandler(async (req, res) => {
   let page = req.params.n;
   let offset = (page * 5) - 5;
   let limit = 5;
-
   const books = await Book.findAll({ 
     offset: offset,
     limit: limit,
@@ -122,6 +109,7 @@ router.get('/:id', asyncHandler(async (req, res, next) => {
   if (book) {
     res.render('update-book', {book, style: '../static/stylesheets/style.css', header: "Update Book"})
   } else {
+    //Book does not exist error
     const err = new Error("Sorry, we couldn't find that particular book.");
     err.status = 404;
     next(err);

@@ -14,10 +14,10 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Please provide a value for "title"',
+          msg: 'Title is required',
         },
         notEmpty: {
-          msg: 'Please provide a value for the "title"',
+          msg: 'Title is required',
         }
       }
 
@@ -27,10 +27,10 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Please provide a value for "author"',
+          msg: 'Author is required',
         },
         notEmpty: {
-          msg: 'Please provide a value for the "author"',
+          msg: 'Author is required',
         }
       }
     },
@@ -39,10 +39,10 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Please provide a value for "genre"',
+          msg: 'Genre is required',
         },
         notEmpty: {
-          msg: 'Please provide a value for the "genre"',
+          msg: 'Genre is required',
         }
       }
     },
@@ -51,10 +51,10 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Please provide a value for "year"',
+          msg: 'Year is required',
         },
         notEmpty: {
-          msg: 'Please provide a value for the "year"',
+          msg: 'Year is required',
         }
       }
 

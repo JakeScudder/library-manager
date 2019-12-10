@@ -4,7 +4,7 @@ block content
   head  
     if error
       h2 Error
-      p= error.message
+      p(class="error") #{error.message}
   form(action="/books/new", method="post")
     p 
       label(for="title") Title
