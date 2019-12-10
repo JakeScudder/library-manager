@@ -5,7 +5,7 @@ block content
   h2= "Books"
   div.container 
     p #[a(class="button" href="/books/new") Create New Book]
-    form(action="/books/search/" class="search" method="post")
+    form(action="/books/search"  class="search" method="post")
       input(type="text" name="query" placeholder="Search for a book..." class="search")
       input(type="submit" id="searchSubmit" value="Search")
     table 

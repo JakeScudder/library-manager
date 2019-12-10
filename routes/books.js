@@ -44,25 +44,38 @@ router.get('/', asyncHandler(async (req, res) => {
 // Search Route and variables
 
 router.post('/search', asyncHandler(async (req, res) => {
-  let searchArray = {};
-    if (req.body.query) {
-      searchArray.title = {[Op.like]: '%' + req.body.query};
-    };
-    if (req.body.query) {
-      searchArray.author = {[Op.like]: '%' + req.body.query};
-    };
-    if (req.body.query) {
-      searchArray.genre = {[Op.like]: '%' + req.body.query};
-    };
-    if (req.body.query) {
-      searchArray.year = {[Op.like]: '%' + req.body.query};
-    };
-    console.log(searchArray);
+  let title;
+  let author;
+  let genre;
+  let year;  
+  let query = req.body.query
+  if (query) {
+    title = {[Op.like]: '%' + query + '%'};
+  };
+  if (query) {
+    author = {[Op.like]: '%' + query + '%'};
+  };
+  if (query) {
+    genre = {[Op.like]: '%' + query + '%'};
+  };
+  if (query) {
+    year = {[Op.like]: '%' + query + '%'};
+  };
+
   const books = await Book.findAll({ 
-    where: searchArray,
+    where: {[Op.or]: [{title},{year}, {genre}, {author}]},
     order: [[ "author", "ASC"], ["year", "DESC"]],
   })
-  console.log(books);
+  console.log(query);
+  // Debugging
+  // const book2 = await Book.findAll({
+  //   where: {
+  //     [Op.or]: [{title: {
+  //       [Op.like]:'%warbreaker'
+  //     }}]
+  //   }
+  // });
+
   res.render("index", { books, pages, style: '../../static/stylesheets/style.css', header: "The Library"});
 }))
 
@@ -148,9 +161,5 @@ router.post("/:id/delete", asyncHandler(async (req, res)=> {
       res.sendStatus(404);
   }
 }))
-
-
-
-
 
 module.exports = router;

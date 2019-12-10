@@ -74,12 +74,12 @@ div.container p {
 /* Page Links*/
 div.page ul li {
   display: inline;
-  font-size: 20px;
+  vertical-align: middle;
+  font-size: 40px;
   margin-right: 10px;
   color: white;
   background: green;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  padding: 10px 14px 12px;
   border-radius: 2px;
   cursor: pointer;
 }
@@ -87,6 +87,13 @@ div.page ul li {
 a.links {
   color: white;
   display: inline-block;
+  vertical-align: middle;
+  padding-top: 10px;
+  padding-right: 14px;
+  padding-bottom: 10px;
+  padding-left: 14px;
+  font-size: 24px;
+  height: 32px;
 }
 
 h2 {
