@@ -127,11 +127,14 @@ router.post('/:id', asyncHandler(async (req, res) => {
       await book.update(req.body);
       res.redirect("/");
     } else {
-      res.sendStatus(404);
-    }
+      const err = new Error("Sorry, we couldn't find that particular book.");
+      err.status = 404;
+      next(err);;
+      }
   } catch (error) {
     if(error.name === "SequelizeValidationError") {
       book = await Book.build(req.body);
+      book.id = req.params.id;
       res.render('update-book', { book, style: '../static/stylesheets/style.css', error, header: "Update Book"})
     } else {
       throw error;

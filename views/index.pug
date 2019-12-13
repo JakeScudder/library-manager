@@ -23,6 +23,7 @@ block content
   div.page
     - var n = 2
     ul
+    //onClick=(() => class="active")
       li: a(class="links" href="/") 1
       while n <= pages
         li #[a(class="links" href="/books/page/" + n alt= n) #{n++}]
