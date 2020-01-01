@@ -11,7 +11,6 @@ const db = {
   models: {},
 }
 
-
 db.models.Book = require('./book.js') (sequelize);
 
 module.exports = db;
