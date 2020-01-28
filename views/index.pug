@@ -22,8 +22,12 @@ block content
           td= n.year
   div.page
     - var n = 2
+    - var currentUrl = '/'
+    - var activeUrl = url
     ul
-    //onClick=(() => class="active")
-      li: a(class="links" href="/") 1
+      if (books.id )
+      li: a(class={active: currentUrl === '/'} href="/" alt=1) 1
       while n <= pages
-        li #[a(class="links" href="/books/page/" + n alt= n) #{n++}]
+          li 
+            a(class="links" name= n href="/books/page/" + n alt= n) #{n++}
+          //- class{active: page === name} 

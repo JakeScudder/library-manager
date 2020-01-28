@@ -23,6 +23,7 @@ let pages;
 const pageLinks = (async (req, res) => {
   const allBooks = await Book.findAll();
   pages = Math.ceil(allBooks.length / 5);
+  console.log(pages);
   return pages;
 })
 
@@ -36,7 +37,7 @@ router.get('/', asyncHandler(async (req, res) => {
     limit: 5,
     order: [[ "author", "ASC"], ["year", "DESC"]]
   })
-  res.render("index", { books, pages, style: '../static/stylesheets/style.css', header: "The Library"});
+  res.render("index", { books, pages, style: '../static/stylesheets/style.css', name: "index", header: "The Library"});
 }))
 
 
@@ -78,7 +79,7 @@ router.get('/page/:n', asyncHandler(async (req, res) => {
     limit: limit,
     order: [[ "author", "ASC"], ["year", "DESC"]],
   })
-  res.render("index", { books, pages, style: '../../static/stylesheets/style.css', header: "The Library"});
+  res.render("index", { books, page: page, pages, style: '../../static/stylesheets/style.css', header: "The Library"});
 }))
 
 /* New Book Route*/
