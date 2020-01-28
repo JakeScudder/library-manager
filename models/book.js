@@ -20,7 +20,6 @@ module.exports = (sequelize) => {
           msg: 'Title is required',
         }
       }
-
     },
     author: {
       type: Sequelize.STRING, 
