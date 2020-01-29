@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  
   header
   h2= "Books"
   div.container 
@@ -21,13 +22,19 @@ block content
           td= n.genre
           td= n.year
   div.page
-    - var n = 2
+    
+    - var n = 1
     - var currentUrl = '/'
     - var activeUrl = url
     ul
       if (books.id )
-      li: a(class={active: currentUrl === '/'} href="/" alt=1) 1
       while n <= pages
-          li 
-            a(class="links" name= n href="/books/page/" + n alt= n) #{n++}
-          //- class{active: page === name} 
+        li 
+          if (page === n)
+            a(class="active" href="/books/page/" + n alt= n) #{n++}
+          else 
+            a(class="links" href="/books/page/" + n alt= n) #{n++}
+  script.
+    console.log(!{JSON.stringify(page)})
+    console.log(!{JSON.stringify(n)})
+

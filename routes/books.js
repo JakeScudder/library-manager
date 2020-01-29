@@ -23,7 +23,6 @@ let pages;
 const pageLinks = (async (req, res) => {
   const allBooks = await Book.findAll();
   pages = Math.ceil(allBooks.length / 5);
-  console.log(pages);
   return pages;
 })
 
