@@ -22,19 +22,17 @@ block content
           td= n.genre
           td= n.year
   div.page
-    
     - var n = 1
-    - var currentUrl = '/'
-    - var activeUrl = url
     ul
-      if (books.id )
       while n <= pages
-        li 
-          if (page === n)
-            a(class="active" href="/books/page/" + n alt= n) #{n++}
-          else 
-            a(class="links" href="/books/page/" + n alt= n) #{n++}
-  script.
-    console.log(!{JSON.stringify(page)})
-    console.log(!{JSON.stringify(n)})
+        if page === n
+          - console.log('active')
+          - var styleActive = "active"
+          li(class= styleActive) 
+            a(href="/books/page/" + n alt= n) #{n++}
+        else 
+          - console.log(`page:${page} === n:${n}`) 
+          - var styleLinks = "links"
+          li(class= styleLinks) 
+            a( href="/books/page/" + n alt= n) #{n++}
 
