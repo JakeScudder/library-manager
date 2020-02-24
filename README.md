@@ -6,7 +6,7 @@
 </div>
 
 ### Description
-This project was built using Express and Sequelize to simulate the management of a database for a Library. The project was set-up using Sequelize CLI and uses Sequelize model validation. 
+This project was built using Express and Sequelize to simulate the management of a database for a Library. It was set-up using Sequelize CLI and uses Sequelize model validation. 
 
 ### Technologies
 JavaScript, Node.js, Express, Pug, Sequelize
